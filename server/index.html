@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		  body{
+		  background-image: url('web_maintanence-1.gif');
+		  background-repeat:no-repeat;
+		  background-size:cover;
+		  
+		  }
+
+			.popup {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					background-color: white;
+					padding: 20px;
+					border: 1px solid black;
+					box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+					z-index: 9999;
+				}
+
+
+		</style>
+	</head>
+
+	<body>
+		<h2>Server Lokal</h2>
+		<ul>
+		  <p><b>1. Panduan Aplikasi Wargaku (Surabaya) : <a href="dokumen/Panduan_WargaKu_MC_Warga_20032021.pdf" target="_blank"> Download / Preview </a></b></p>
+		  <p><b>2. Portofolio (Galih Okta Siwi) : <a href="dokumen/CV - GALIH OKTA SIWI.pdf" target="_blank"> Download / Preview </a> &nbsp; <button onclick="showPopup()">Baca Ini Dulu</button></b></p>
+		</ul>
+
+		<div id="popup" class="popup" style="display:none;">
+		<h2>Dokumen Ter- enkripsi</h2>
+		<a href="https://t.me/galihos"><b>1. Contact to Telegram</b></a>
+		</br>
+		</br>
+		<a href="mailto:gosiwi35@gmail.com?subject=Hello&body=Hi%20there!%0D%0A%0D%0A"><b>2. Contact To E-mail</b></a>
+		</br>
+		</br>
+		
+		<button onclick="hidePopup()">Close</button>
+		</div>
+	
+		<script>
+		function showPopup() {
+			document.getElementById("popup").style.display = "block";
+		}
+
+		function hidePopup() {
+			document.getElementById("popup").style.display = "none";
+		}
+		</script> 
+
+	</body>
+</html>

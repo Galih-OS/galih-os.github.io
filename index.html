@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themesdesign.in/harold/layout/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Apr 2023 05:55:53 GMT -->
+<head>
+    <meta charset="utf-8" />
+    <title>Galihos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" " />
+    <meta name="keywords" content="" />
+    <meta content="Themesdesign" name="author" />
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" id="bootstrap-style" />
+
+    <!-- Material Icon Css -->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css" type="text/css" />
+
+    <!-- Unicon Css -->
+    <link rel="stylesheet" href="css/line.css" />
+
+    <!-- Swiper Css -->
+    <link rel="stylesheet" href="css/tiny-slider.css" type="text/css" />
+    <link rel="stylesheet" href="css/tiny-slider.css.css" type="text/css" />
+    <link rel="stylesheet" href="css/swiper.min.css" type="text/css" />
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="css/style.min.css" type="text/css" />
+
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="71">
+
+    <!-- light-dark mode button -->
+    <a href="javascript: void(0);" id="mode" class="mode-btn text-white rounded-end">
+        <i class="uil uil-brightness mode-dark mx-auto"></i>
+        <i class="uil uil-moon bx-spin mode-light"></i>
+    </a>
+
+
+    <!--Navbar Start-->
+    <nav class="navbar navbar-expand-lg fixed-top sticky" id="navbar">
+        <div class="container-fluid custom-container">
+            <a class="navbar-brand logo text-uppercase" href="index.html">
+                <img src="images/logo-light.png" class="logo-light" alt="" height="34">
+                <img src="images/logo-dark.png" class="logo-dark" alt="" height="34">
+            </a>
+
+            <button class="navbar-toggler me-3 order-2 ms-4" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-label="Toggle navigation">
+                <i class="mdi mdi-menu"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ms-auto navbar-center">
+                    <li class="nav-item active">
+                        <a href="#home" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-hover">
+                        <a href="#aboutme" class="nav-link ">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-hover">
+                        <a href="#work" class="nav-link ">Work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#blog" class="nav-link">Blog</a>
+                    </li>	
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+					<li class="nav-item">
+                        <a href="pricelist.xlsx.html" target="_blank" class="nav-link mdi mdi-shopping"> Shopping</a>
+                    </li>
+						
+                </ul>
+                <!--end navbar-nav-->
+            </div>
+        </div>
+        <!--end container-->
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Sign up</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form class="row g-3 needs-validation">
+                        <div class="col-md-6">
+                            <label for="validationCustom01" class="form-label">First name <span
+                                    class="text-primary">*</span></label>
+                            <input type="text" class="form-control" id="validationCustom01" value="" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustom02" class="form-label">Email <span
+                                    class="text-primary">*</span></label>
+                            <input type="email" class="form-control" id="validationCustom02" value="" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustom03" class="form-label">Subject <span
+                                    class="text-primary">*</span></label>
+                            <input type="text" class="form-control" id="validationCustom03" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustom05" class="form-label">Password <span
+                                    class="text-primary">*</span></label>
+                            <input type="password" class="form-control" id="validationCustom05" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="validationTextarea" class="form-label">Textarea<span
+                                    class="text-primary">*</span></label>
+                            <textarea class="form-control" id="validationTextarea" required></textarea>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end modal -->
+
+
+    <!-- home section -->
+    <section class="home" id="home" style="background-image: url(images/bg-home.png);">
+        <!-- start container -->
+        <div class="container position-relative">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="home-slider" id="home-slider">
+                        <div class="item">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6">
+                                    <div class="content-item">
+                                        <p class="text-warning fw-semibold mb-0">Hello! I AM</p>
+                                        <div class="home-title mb-0 fw-bold h1">
+                                            <span class="typewrite " data-period="2000"
+                                                data-type='[ "Galih OS.","IT Staf.","And Financial Administration Int The Goverment." ]'>
+                                                <span class="wrap text-dark"></span>
+                                            </span>
+                                        </div>
+                                        <p class="mt-3 text-muted" style="text-align: justify">I was a blogger and vlogger. I was able to work on the team. I'm also able to work under pressure, as is the professionalism in the world of work in the institutions that I follow. I like art, eating and traveling far. Nature is my favorite place. All those moments are in my social media history.</p>
+
+                                        <div class="icon-item mt-4">
+                                            <div class="d-flex">
+                                                <a href="https://www.instagram.com/galihoktasiwi/" target="_blank">
+                                                    <div class="social-icon instagram avatar-sm">
+                                                        <i class="mdi mdi-instagram"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="https://twitter.com/Galih_OS" target="_blank">
+                                                    <div class="social-icon twitter avatar-sm">
+                                                        <i class="mdi mdi-twitter"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="https://www.linkedin.com/in/galih-okta-siwi-8a356910a/" target="_blank">
+                                                    <div class="social-icon linkedin avatar-sm">
+                                                        <i class="mdi mdi-linkedin"></i>
+                                                    </div>
+                                                </a>												
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="my-image">
+                                        <img src="images/home/home.png" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- slider item -->
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end home section -->
+
+
+
+    <!-- about-me section -->
+    <section class="section about-me" id="aboutme">
+        <!-- container -->
+        <div class="container">
+            <div class="about-box">
+                <div class="row">
+
+                    <div class="col-lg-6 position-relative">
+                        <div class="image-round"></div>
+                        <div class="about-image p-4 pb-0">
+                            <img src="images/about.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="about-item p-5">
+                            <h2 class="display-5 fw-semibold">About Me</h2>
+                            <p class="text-muted fs-14" style="text-align: justify">I was a blogger and vlogger. I was able to work on the team. I'm also able to work under pressure, as is the professionalism in the world of work in the institutions that I follow. I like art, eating and traveling far. Nature is my favorite place. All those moments are in my social media history.</p>
+
+                            <ul class="nav nav-pills mb-3 mt-4 pt-2" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                        aria-selected="true">Skills</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-profile" type="button" role="tab"
+                                        aria-controls="pills-profile" aria-selected="false">Experience</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-contact" type="button" role="tab"
+                                        aria-controls="pills-contact" aria-selected="false">Education</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+
+                                    <div class="skill-item mt-4 pt-2">
+                                        <div class="d-flex justify-content-between">
+                                            <h6>HTML | SQL | LOCAL NETWORKING</h6>
+                                            <h6></h6>
+                                        </div>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="100"
+                                                aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                        </div>
+                                    </div> 
+
+									<div class="skill-item mt-4 pt-2">
+                                        <div class="d-flex justify-content-between">
+                                            <h6>MS. OFFICE | MS EXCEL (2010/2019) | PHOTOSHOP </h6>
+                                            <h6></h6>
+                                        </div>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="100"
+                                                aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                        </div>
+                                    </div>									
+									
+									<div class="skill-item mt-4 pt-2">
+                                        <div class="d-flex justify-content-between">
+                                            <h6>TROUBLESHOOTING WINDOWS 7-10</h6>
+                                            <h6></h6>
+                                        </div>
+                                        <div class="progress" style="height: 5px;">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="100"
+                                                aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                                        </div>
+                                    </div>	
+                                  
+                                </div>
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                    aria-labelledby="pills-profile-tab">
+
+                                    <div class="experience">
+                                        <div class="row position-relative">
+                                            <div class="col-2">
+                                                <div class="border-left"></div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="mt-4 pt-2">
+                                                    <p class="text-muted fs-15">2016 - Website-Based Information Development at SMA Wachid Hasyim 5</p>
+                                                </div>
+                                            </div>
+                                        </div>                                        
+										
+										<div class="row position-relative">
+                                            <div class="col-2">
+                                                <div class="border-left"></div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="mt-4 pt-2">
+													<p class="text-muted fs-15">2018 - The creation of a website-based school exam application at SMA IPIEMS Surabaya</p>
+                                                </div>
+                                            </div>
+                                        </div>										
+										
+										<div class="row position-relative">
+                                            <div class="col-2">
+                                                <div class="border-left"></div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="mt-4 pt-2">
+                                                    <p class="text-muted fs-15">2018 - Website-Based Information Development at Kindergarten Hospital. III Brawijaya Surabaya</p>
+                                                </div>
+                                            </div>
+                                        </div>										
+										
+										<div class="row position-relative">
+                                            <div class="col-2">
+                                                <div class="border-left"></div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="mt-4 pt-2">
+                                                    <p class="text-muted fs-15">2020 - Development of a Website-Based Salary and Allowance Information System at the Surabaya City Regional Financial and Tax Management Agency (Government)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                                    aria-labelledby="pills-contact-tab">
+                                    <div class="experience">
+                                        <div class="row position-relative">
+                                            <div class="col-2">
+                                                <div class="border-left"></div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="mt-4 pt-2">
+													<p class="text-muted fs-15 mb-0">2011 - Courses Basic Windows Multimedia and Internet</p>
+                                                </div>
+                                            </div>
+                                        </div>                                      
+										
+										<div class="row position-relative">
+                                            <div class="col-2">
+                                                <div class="border-left"></div>
+                                            </div>
+                                            <div class="col-10">
+                                                <div class="mt-4 pt-2">
+                                                    <p class="text-muted fs-15 mb-0">2013	- 2018 Computer Bachelor in Stikom Surabaya</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end about-me -->
+
+
+    <!-- start work -->
+    <section class="section work" id="work">
+        <!-- start container -->
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mb-5">
+                        <h6 class="mb-0 text-muted fs-15">What AM I DOING</h6>
+                        <h2>WORK WITH A SMILE</h2>
+                        <p class="para-width text-muted mb-0 fs-15">Do it sincerely and maximally, the rest let God's hand help you. Remember, there are no insurmountable obstacles..</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="info-item box-shadow mt-4 pt-2">
+                        <div class="p-4">
+                            <div class="research avatar-sm bg-soft-purple text-center">
+                                <i class="mdi mdi-cached fs-24 text-purple"></i>
+                            </div>
+                            <h6 class="mt-4">Research & Analysis</h6>
+                            <p class="text-muted fs-15" style="text-align: justify">Creating modules and socializing the budget entry process on the SIPD application, evaluating the related APBD entry process and changes to the SIPD application.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-item box-shadow mt-4 pt-2">
+                        <div class="p-4">
+                            <div class="research avatar-sm bg-soft-warning text-center">
+                                <i class="mdi mdi-layers fs-24 text-warning"></i>
+                            </div>
+                            <h6 class="mt-4">Quality Control</h6>
+                            <p class="text-muted fs-15 " style="text-align: justify">Monitoring the budget entry process in the SIPD application by OPD, Presenting data on the results of OPD budget shifts.</p>
+                        </div>
+                    </div>
+                </div>
+				
+                <div class="col-lg-4">
+                    <div class="info-item box-shadow mt-4 pt-2">
+                        <div class="p-4">
+                            <div class="research avatar-sm bg-soft-pink text-center">
+                                <i class="mdi mdi-email-open fs-24 text-pink"></i>
+                            </div>
+                            <h6 class="mt-4">Communication Network in Government Services</h6>
+                            <p class="text-muted fs-15" style="text-align: justify">Coordinate with admins of other budget applications regarding the suitability of data in the SIPD application, Provide assistance to OPD Office/Agency supervisors regarding the budget entry process in the SIPD application</p>
+                        </div>
+                    </div>
+                </div>				
+				
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end work -->
+
+    <!-- start blog -->
+    <section class="section blog" id="blog">
+        <!-- start container -->
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="text-center mb-4">
+                        <h6 class="mb-0 text-muted fs-15">Blog</h6>
+                        <h2>Our Regular News</h2>
+                        <!--<p class="para-width text-muted mb-0 fs-15">A Private Limited is the most popular type of
+                            partnership Malta. The limited liability is, in fact, the only type of company allowed by
+                            Companies.</p>-->
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-lg-4 mt-4 pt-2">
+                    <div class="blog-item p-4 box-shadow">
+                        <div class="blog-image">
+                            <img src="images/blog/img-1.png" alt="" class="img-fluid">
+                            <div class="blog-image-icon bg-blue">
+                                <i class="mdi mdi-lan fs-24"></i>
+                            </div>
+                        </div>
+                        <div class="blog-content mt-5">
+                            <!-- <p class="text-muted fw-semibold mb-2">May 25, 2021</p> -->
+                            <a href="#" ><h5>Kenyataannya.</h5></a>
+                            <p class="fs-15 text-muted">Di bandara kita lebih banyak melihat pelukan tulus dibanding acara pernikahan ..</p>
+                            <a href="https://e-galihos.blogspot.com/" target="_blank" class="text-dark fw-semibold">Learn more <i
+                                    class="mdi mdi-arrow-right fs-16"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4 pt-2">
+                    <div class="blog-item p-4 box-shadow">
+                        <div class="blog-image">
+                            <img src="images/blog/img-2.png" alt="" class="img-fluid">
+                            <div class="blog-image-icon bg-secondary">
+                                <i class="mdi mdi-responsive fs-24"></i>
+                            </div>
+                        </div>
+                        <div class="blog-content mt-5">
+                            <!-- <p class="text-muted fw-semibold mb-2">May 25, 2021</p> -->
+                            <a href="#"><h5>Pesan dari ayah.</h5></a>
+                            <p class="fs-15 text-muted">Suatu kali seorang ayah ditanya oleh anaknya, mengapa ayah selalu rajin berdoa, padahal..</p>
+                            <a href="https://e-galihos.blogspot.com/" target="_blank" class="text-dark fw-semibold">Learn more <i
+                                    class="mdi mdi-arrow-right fs-16"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4 pt-2">
+                    <div class="blog-item p-4 box-shadow">
+                        <div class="blog-image">
+                            <img src="images/blog/img-3.png" alt="" class="img-fluid">
+                            <div class="blog-image-icon bg-primary">
+                                <i class="mdi mdi-vector-combine fs-24"></i>
+                            </div>
+                        </div>
+                        <div class="blog-content mt-5">
+                            <!-- <p class="text-muted fw-semibold mb-2">May 25, 2021</p> -->
+                            <a href="#"><h5>Jangan Menangis Jenderal.</h5></a>
+                            <p class="fs-15 text-muted">Jenderal ... !! Turunkan tanganmu, apa yang sedang kau hormati ... hari ini, rakyatmu..</p>
+                            <a href="https://e-galihos.blogspot.com/" target="_blank"class="text-dark fw-semibold">Learn more <i
+                                    class="mdi mdi-arrow-right fs-16"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end blog -->
+
+    <!-- start footer -->
+    <section class=" footer" id="contact">
+        <!-- start container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="mt-5">
+                        <a class=" logo text-uppercase" href="index.html">
+                            <img src="images/logo-light.png" class="logo-light" alt="" height="32">
+                            <!-- <img src="images/logo-light.png" class="logo-dark" alt="" height="28"> -->
+                        </a>
+                        <p class="fs-15 text-white-50 mt-4">untuk mengenal dan mengetahui informasi lebih lanjut, segera hubungi kami</p>
+
+                        <div class="icon-item mt-4">
+                            <div class="d-flex">
+                                <a href="https://t.me/galihos" target="_blank">
+                                    <div class="social-icon telegram avatar-xs">
+                                        <i class="mdi mdi-telegram "></i>
+                                    </div>
+                                </a>
+                                <a href="https://www.instagram.com/galihoktasiwi/" target="_blank">
+                                    <div class="social-icon instagram avatar-xs">
+                                        <i class="mdi mdi-instagram "></i>
+                                    </div>
+                                </a>
+                                <a href="https://twitter.com/Galih_OS" target="_blank">
+                                    <div class="social-icon twitter avatar-xs">
+                                        <i class="mdi mdi-twitter"></i>
+                                    </div>
+                                </a>
+                                <a href="https://www.linkedin.com/in/galih-okta-siwi-8a356910a/" target="_blank">
+                                    <div class="social-icon linkedin avatar-xs">
+                                        <i class="mdi mdi-linkedin"></i>
+                                    </div>
+                                </a>
+								<a href="https://wa.me/6289677853639" target="_blank">
+									<div class="social-icon linkedin avatar-xs">
+										<i class="mdi mdi-whatsapp"></i>
+									</div>
+								</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-4">
+                    <h5 class="text-white">Company</h5>
+
+                    <ul class="footer-text list-unstyled mt-4">
+                        <li><a href="https://www.youtube.com/@galihoktasiwi/videos" target="_blank"><i class="mdi mdi-arrow-right me-2"></i>Youtube</a></li>
+                        <li><a href="#contact"><i class="mdi mdi-arrow-right me-2"></i>Contact</a></li>
+                        <li><a href="#aboutme"><i class="mdi mdi-arrow-right me-2"></i>About Us</a></li>
+                        <li><a href="server/index.html" target="_blank"><i class="mdi mdi-arrow-right me-2"></i>Local Server</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-lg-3 mt-4">
+                    <h5 class="text-white">Linkedin</h5>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="linkedin-box mt-4">
+                                <p class="mb-0 text-white-50 fs-15 mb-2">The full monty spiffing good time .</p>
+                                <a href="https://www.linkedin.com/in/galih-okta-siwi-8a356910a/" target="_blank" class="fs-15">@Galih-OS</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="linkedin-content d-flex align-items-center">
+                        <div class="icon">
+                            <i class="mdi mdi-linkedin text-white fs-40"></i>
+                        </div>
+                        <div class="icon-content ms-2">
+                            <a href="https://www.linkedin.com/in/galih-okta-siwi-8a356910a/" target="_blank" class="text-white-50">Linkedin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-4">
+                    <h5 class="text-white">Follow Me</h5>
+                    <p class="mb-0 text-white-50 mt-4">if you want to follow or just want to know me, just click "Go".</p>
+                    <div class="input-group my-3">
+                        <input type="text" class="form-control p-3" placeholder="subscribe" aria-label="subscribe"
+                            aria-describedby="basic-addon2">
+                        <a href="https://www.youtube.com/channel/UCy5QyqbTWXQJEtA72iHwZ2Q?sub_confirmation=1" target="_blank" class="input-group-text bg-primary text-white px-4" id="basic-addon2">Go</a>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+
+    <section class="bottom-footer py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <p class="mb-0 text-center text-muted">©
+                        <script>document.write(new Date().getFullYear())</script> <i
+                            class="mdi mdi-heart text-danger"></i> by <a href="#"
+                            class="text-muted">Galih-OS.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end footer -->
+
+    <!--Bootstrap Js-->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- Slider Js -->
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/swiper.min.js"></script>
+
+    <!-- conter -->
+    <script src="js/counter.init.js"></script>
+
+    <!-- App Js -->
+    <script src="js/app.js"></script>
+	
+</body>
+
+</html>
