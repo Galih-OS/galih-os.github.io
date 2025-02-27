@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<!--adsense-->
+	<meta name="google-adsense-account" content="ca-pub-9607610058453393">
+	<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Table Container dengan Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style>
+        .custom-container {
+            max-width: 900px; /* Mengatur lebar maksimal container */
+            margin: auto; /* Agar berada di tengah */
+        }
+
+        table {
+            border-radius: 10px; /* Membuat sudut tabel lebih halus */
+            overflow: hidden;
+        }
+
+        /* Animasi Background Gradasi */
+        @keyframes gradientAnimation {
+            0% { background: #149DA5; }
+            25% { background: #51E4BA; }
+            50% { background: #8CF1A3; }
+        }
+
+        body {
+            animation: gradientAnimation 10s infinite alternate ease-in-out;
+            transition: background 1s ease-in-out;
+            
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer a {
+            color: #51E4BA;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>		
+
+</head>
+
+<body oncontextmenu="return false;">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Local Server Mini</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html" target="_blank">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://t.me/galihos">Contact me</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Konten -->
+    <div class="container mt-4">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>No</th>
+                        <th class="text-center">Data</th>							
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. Panduan Aplikasi Wargaku (Surabaya) :</td>
+                        <td class="text-center">
+                            <a href="dokumen/Panduan_WargaKu_MC_Warga_20032021.pdf" class="btn btn-danger btn-sm download-btn" target="_blank">
+                                <i class="bi bi-file-earmark-pdf"></i> Download / Preview
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#</td>
+                        <td>#</td>
+                    </tr>
+                    <tr>
+                        <td>#</td>
+                        <td>#</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2018 <a href="https://galih-os.github.io" target="_blank">Galihos</a>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<amp-auto-ads type="adsense" data-ad-client="ca-pub-9607610058453393"></amp-auto-ads>
+
+</body>
+</html>
