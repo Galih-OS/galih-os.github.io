@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konversi Angka ke Terbilang Rupiah</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: "Segoe UI", sans-serif;
+    }
+    .container {
+      max-width: 600px;
+      margin-top: 50px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h3 {
+      font-weight: 600;
+      text-align: center;
+    }
+    #copyButton {
+      display: none;
+    }
+    @media (max-width: 576px) {
+      .container {
+        margin-top: 20px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <center>
+      <h3>Konversi Angka ke Terbilang Rupiah</h3>
+      <h6>Pembatasan hingga Triliun</h6>
+    </center>
+    <br>
+    <form id="convertForm">
+      <div class="form-group">
+        <label for="number">Masukkan Angka (boleh gunakan koma atau titik):</label>
+        <input type="text" id="number" name="number" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Konversi</button>
+      <button type="button" id="copyButton" class="btn btn-secondary ml-2">Copy</button>
+      <button type="button" id="resetButton" class="btn btn-danger ml-2">Reset</button>
+    </form>
+    <div id="result" class="mt-4 text-center font-weight-bold"></div>
+    <hr>
+    <p class="mb-0 text-center text-muted">
+      © <script>document.write(new Date().getFullYear())</script>
+      <i class="mdi mdi-heart text-danger"></i> by 
+      <a href="https://galih-os.github.io/" target="_blank" class="text-muted">mrOS</a> |
+      Telegram: 
+      <a href="https://t.me/galihos" target="_blank">t.me/galihos</a>
+    </p>
+    <div id="google_translate_element" class="text-center mt-2"></div>
+  </div>
+
+  <script type="text/javascript">
+    // Fungsi utama untuk konversi angka ke terbilang
+    function terbilang(number) {
+      number = parseInt(number);
+      if (isNaN(number)) return "Masukkan angka yang valid.";
+
+      const satuan = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"];
+
+      function toWords(n) {
+        if (n < 12) return satuan[n];
+        else if (n < 20) return toWords(n - 10) + " belas";
+        else if (n < 100) return toWords(Math.floor(n / 10)) + " puluh " + toWords(n % 10);
+        else if (n < 200) return "seratus " + toWords(n - 100);
+        else if (n < 1000) return toWords(Math.floor(n / 100)) + " ratus " + toWords(n % 100);
+        else if (n < 2000) return "seribu " + toWords(n - 1000);
+        else if (n < 1000000) return toWords(Math.floor(n / 1000)) + " ribu " + toWords(n % 1000);
+        else if (n < 1000000000) return toWords(Math.floor(n / 1000000)) + " juta " + toWords(n % 1000000);
+        else if (n < 1000000000000) return toWords(Math.floor(n / 1000000000)) + " miliar " + toWords(n % 1000000000);
+        else if (n < 1000000000000000) return toWords(Math.floor(n / 1000000000000)) + " triliun " + toWords(n % 1000000000000);
+        else return "Melebihi batas (Triliun)";
+      }
+
+      const hasil = toWords(number).replace(/\s+/g, ' ').trim();
+      return hasil.charAt(0).toUpperCase() + hasil.slice(1) + " rupiah";
+    }
+
+    document.getElementById("convertForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let number = document.getElementById("number").value.replace(/[.,\s]/g, "");
+      const result = document.getElementById("result");
+      if (number === "" || isNaN(number)) {
+        result.innerHTML = "<span class='text-danger'>Masukkan angka yang valid!</span>";
+        return;
+      }
+      result.innerHTML = "(" + terbilang(number) + ")";
+      document.getElementById("copyButton").style.display = "inline-block";
+    });
+
+    document.getElementById("copyButton").addEventListener("click", function() {
+      const text = document.getElementById("result").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const alertBox = document.createElement("div");
+        alertBox.className = "alert alert-success mt-3";
+        alertBox.textContent = "Tersalin! Segera paste (CTRL + V).";
+        document.querySelector(".container").prepend(alertBox);
+        setTimeout(() => alertBox.remove(), 3000);
+      });
+    });
+
+    document.getElementById("resetButton").addEventListener("click", function() {
+      document.getElementById("convertForm").reset();
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("copyButton").style.display = "none";
+    });
+  </script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'id',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        multilanguagePage: true
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
