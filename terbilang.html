@@ -66,6 +66,7 @@
     function terbilang(number) {
       number = parseInt(number);
       if (isNaN(number)) return "Masukkan angka yang valid.";
+      if (number === 0) return "nol rupiah"; // ✅ Kondisi tambahan untuk angka nol
 
       const satuan = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"];
 
