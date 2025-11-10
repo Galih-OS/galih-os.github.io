@@ -84,7 +84,7 @@
       }
 
       const hasil = toWords(number).replace(/\s+/g, ' ').trim();
-      return hasil.charAt(0).toUpperCase() + hasil.slice(1) + " rupiah";
+      return hasil.charAt(0).toLowerCase() + hasil.slice(1) + " rupiah";
     }
 
     document.getElementById("convertForm").addEventListener("submit", function(e) {
