@@ -25,6 +25,10 @@
     #copyButton {
       display: none;
     }
+    #result {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
     @media (max-width: 576px) {
       .container {
         margin-top: 20px;
@@ -37,7 +41,7 @@
   <div class="container">
     <center>
       <h3>Konversi Angka ke Terbilang Rupiah</h3>
-      <h6>Pembatasan hingga Triliun</h6>
+      <h6>Mendukung hingga Triliun</h6>
     </center>
     <br>
     <form id="convertForm">
@@ -52,21 +56,19 @@
     <div id="result" class="mt-4 text-center font-weight-bold"></div>
     <hr>
     <p class="mb-0 text-center text-muted">
-      © <script>document.write(new Date().getFullYear())</script>
-      <i class="mdi mdi-heart text-danger"></i> by 
+      © <script>document.write(new Date().getFullYear())</script> 
       <a href="https://galih-os.github.io/" target="_blank" class="text-muted">mrOS</a> |
-      Telegram: 
-      <a href="https://t.me/galihos" target="_blank">t.me/galihos</a>
+      Telegram: <a href="https://t.me/galihos" target="_blank">t.me/galihos</a>
     </p>
     <div id="google_translate_element" class="text-center mt-2"></div>
   </div>
 
   <script type="text/javascript">
-    // Fungsi utama untuk konversi angka ke terbilang
+    // Fungsi konversi angka ke terbilang
     function terbilang(number) {
       number = parseInt(number);
       if (isNaN(number)) return "Masukkan angka yang valid.";
-      if (number === 0) return "nol rupiah"; // ✅ Kondisi tambahan untuk angka nol
+      if (number === 0) return "nol rupiah";
 
       const satuan = ["", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas"];
 
@@ -88,15 +90,29 @@
       return hasil.charAt(0).toLowerCase() + hasil.slice(1) + " rupiah";
     }
 
+    // Format angka jadi Rupiah
+    function formatRupiah(angka) {
+      const reverse = angka.toString().split('').reverse().join('');
+      const ribuan = reverse.match(/\d{1,3}/g);
+      return "Rp. " + ribuan.join('.').split('').reverse().join('');
+    }
+
     document.getElementById("convertForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      let number = document.getElementById("number").value.replace(/[.,\s]/g, "");
+      let input = document.getElementById("number").value.replace(/[.,\s]/g, "");
       const result = document.getElementById("result");
-      if (number === "" || isNaN(number)) {
+
+      if (input === "" || isNaN(input)) {
         result.innerHTML = "<span class='text-danger'>Masukkan angka yang valid!</span>";
         return;
       }
-      result.innerHTML = "(" + terbilang(number) + ")";
+
+      const formattedNumber = formatRupiah(input);
+      const words = terbilang(input);
+
+      // ✅ Gabungkan dalam satu paragraf
+      result.innerHTML = `${formattedNumber} (${words})`;
+
       document.getElementById("copyButton").style.display = "inline-block";
     });
 
@@ -105,7 +121,7 @@
       navigator.clipboard.writeText(text).then(() => {
         const alertBox = document.createElement("div");
         alertBox.className = "alert alert-success mt-3";
-        alertBox.textContent = "Tersalin! Segera paste (CTRL + V).";
+        alertBox.textContent = "Tersalin! Gunakan CTRL + V untuk menempel.";
         document.querySelector(".container").prepend(alertBox);
         setTimeout(() => alertBox.remove(), 3000);
       });
