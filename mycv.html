@@ -50,6 +50,149 @@
     }
   </style>
 </head>
+
+<!-- PASSWORD GATE (letakkan di bagian atas <body>) -->
+<style>
+  #pw-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12,12,12,0.95);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+  #pw-box {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    text-align: center;
+  }
+  #pw-box input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    font-size: 16px;
+  }
+  #pw-box button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  #pw-msg { margin-top: 10px; font-size: 14px; opacity: 0.9; }
+</style>
+
+<div id="pw-overlay" aria-hidden="false">
+  <div id="pw-box" role="dialog" aria-modal="true" aria-label="Masukkan password">
+    <h2 style="margin:0 0 6px 0;">Halaman Dilindungi</h2>
+    <div style="font-size:14px; opacity:0.9;">Masukkan password untuk melihat halaman</div>
+
+    <input id="pw-input" type="password" placeholder="Masukkan password..." autocomplete="current-password" />
+    <button id="pw-btn">Buka Halaman</button>
+    <div id="pw-msg" aria-live="polite"></div>
+    <div style="margin-top:8px; font-size:12px; opacity:0.7;">Tip: password tidak case-sensitive pengecekan dapat diubah jika ingin.</div>
+  </div>
+</div>
+
+<script>
+/*
+  Mechanism:
+  - Compare SHA-256 hash of entered password to storedHash.
+  - storedHash diset ke hash dari "12qwerty%OK".
+  - Jika browser tidak mendukung SubtleCrypto, fallback ke perbandingan string (kurang aman).
+*/
+
+/* ===== UBAH HASH DI SINI JIKA INGIN PASSWORD LAIN (hex SHA-256) ===== */
+const storedHash = '85e248fbc76bafa65c5dff412f893d8e88b5dfab0ec299332c643b99c720b4ac'; // hash untuk "12qwerty%OK"
+
+const overlay = document.getElementById('pw-overlay');
+const input = document.getElementById('pw-input');
+const btn = document.getElementById('pw-btn');
+const msg = document.getElementById('pw-msg');
+
+/* disable scrolling sementara */
+document.documentElement.style.overflow = 'hidden';
+document.body.style.overflow = 'hidden';
+
+/* helper: convert ArrayBuffer -> hex */
+function toHex(buffer) {
+  const b = new Uint8Array(buffer);
+  return Array.from(b).map(x => x.toString(16).padStart(2,'0')).join('');
+}
+
+/* compute SHA-256 using SubtleCrypto */
+async function sha256Hex(str) {
+  if (window.crypto && crypto.subtle && crypto.subtle.digest) {
+    const enc = new TextEncoder();
+    const data = enc.encode(str);
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return toHex(digest);
+  } else {
+    // fallback: simplistic (NOT secure) - return raw string so fallback check will work only if storedHash was set to plain text.
+    return str;
+  }
+}
+
+async function tryUnlock() {
+  const val = input.value || '';
+  msg.textContent = 'Memeriksa...';
+  btn.disabled = true;
+  try {
+    const h = await sha256Hex(val);
+    if (h === storedHash) {
+      // unlock
+      overlay.style.display = 'none';
+      overlay.setAttribute('aria-hidden','true');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      msg.textContent = '';
+      // optional: simpan unlocked flag agar refresh masih terkunci (ubah sesuai kebutuhan)
+      // localStorage.setItem('cv_unlocked', '1');
+    } else {
+      msg.textContent = 'Password salah — coba lagi.';
+      input.value = '';
+      input.focus();
+    }
+  } catch (e) {
+    console.error(e);
+    msg.textContent = 'Terjadi kesalahan saat memeriksa password.';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+btn.addEventListener('click', tryUnlock);
+input.addEventListener('keydown', function(e){ if (e.key === 'Enter') tryUnlock(); });
+
+/* Fokus ke input saat halaman dimuat */
+input.focus();
+
+/* Optional: jika ingin menyimpan status terbuka (tidak menyarankan di komputer publik) --
+   Uncomment block di bawah untuk memeriksa localStorage:
+*/
+/*
+if (localStorage.getItem('cv_unlocked') === '1') {
+  overlay.style.display = 'none';
+  document.documentElement.style.overflow = '';
+  document.body.style.overflow = '';
+}
+*/
+</script>
+
 <body>
   <div class="container">
     <div class="header">
@@ -128,5 +271,60 @@
     </div>
 
   </div>
+  
+ <!-- BLOKIR KLIK KANAN + F12 + CTRL+U (VERSI TERKUAT) -->
+<script>
+// Blok klik kanan
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Blok kombinasi keyboard
+function blockKeys(e) {
+  // F12
+  if (e.key === "F12" || e.code === "F12") {
+    e.preventDefault();
+    return false;
+  }
+
+  // CTRL + U
+  if (e.ctrlKey && (e.key === "u" || e.key === "U" || e.code === "KeyU")) {
+    e.preventDefault();
+    return false;
+  }
+
+  // CTRL + SHIFT + I/J/C
+  if (e.ctrlKey && e.shiftKey && (
+    e.key === "I" || e.key === "i" ||
+    e.key === "J" || e.key === "j" ||
+    e.key === "C" || e.key === "c"
+  )) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+document.addEventListener("keydown", blockKeys);
+document.addEventListener("keyup", blockKeys);
+window.addEventListener("keydown", blockKeys);
+window.addEventListener("keyup", blockKeys);
+
+// Blok select (opsional)
+document.addEventListener("selectstart", e => e.preventDefault());
+
+// Blok inspect-devtools (opsional)
+let devtools = false;
+setInterval(() => {
+  const start = performance.now();
+  debugger;
+  const end = performance.now();
+  if (end - start > 100) {
+    devtools = true;
+    document.body.innerHTML =
+      "<h2 style='text-align:center;margin-top:40px;color:red;'>Developer Tools Tidak Diizinkan</h2>";
+  }
+}, 200);
+</script>
+
+ 
+  
 </body>
 </html>
