@@ -31,14 +31,12 @@
 <script>
 const PASSWORD_HASH = '85e248fbc76bafa65c5dff412f893d8e88b5dfab0ec299332c643b99c720b4ac';
 
-// Fungsi bantu untuk ubah ArrayBuffer ke hex
 function buf2hex(buffer) {
   return [...new Uint8Array(buffer)]
     .map(b => b.toString(16).padStart(2, '0'))
     .join('');
 }
 
-// Fungsi hashing SHA-256
 async function sha256Hex(str) {
   const enc = new TextEncoder();
   const data = enc.encode(str);
@@ -46,7 +44,13 @@ async function sha256Hex(str) {
   return buf2hex(hashBuffer);
 }
 
-// Saat tombol ditekan
+function hiddenRedirect(){
+  const a = ["bXljdi5odG1s"];
+  const b = atob(a[0]);
+  const c = atob("d2luZG93LmxvY2F0aW9uLmhyZWY=");
+  eval(c + "='" + b + "'");
+}
+
 document.getElementById('checkBtn').addEventListener('click', async () => {
   const pw = document.getElementById('pw').value || '';
   const msgEl = document.getElementById('msg');
@@ -64,11 +68,11 @@ document.getElementById('checkBtn').addEventListener('click', async () => {
     if (hashed === PASSWORD_HASH) {
       msgEl.textContent = 'Password benar — mengarahkan ke halaman tujuan...';
       msgEl.className = 'ok';
-      
-      // Delay sebentar lalu redirect
+
       setTimeout(() => {
-        window.location.href = "mycv.html";
+        hiddenRedirect();
       }, 1000);
+
     } else {
       msgEl.textContent = 'Password salah. Silakan hubungi pemilik melalui t.me/galihos.';
       msgEl.className = 'err';
