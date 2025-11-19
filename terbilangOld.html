@@ -20,13 +20,18 @@
         }
         #copyButton { display: none; }
     </style>
+
     <link rel="shortcut icon" href="img/icon.png">
 </head>
 
 <body>
     <div class="container">
+
+        <!-- TEMPAT ALERT MUNCUL -->
+        <div id="alertArea"></div>
+
         <center><h3>Versi Lama</h3></center>
-		<center><h3>Konversi Angka ke Terbilang Rupiah</h3></center>
+        <center><h3>Konversi Angka ke Terbilang Rupiah</h3></center>
         <center><h3>Pembatasan Terbilang Hanya s/d Triliun</h3></center>
         <br>
 
@@ -56,16 +61,6 @@
 
             <br><br>
             <i id="google_translate_element"></i>
-
-            <script>
-                function googleTranslateElementInit() {
-                    new google.translate.TranslateElement(
-                        {pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true},
-                        "google_translate_element"
-                    );
-                }
-            </script>
-            <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         </p>
 
         <a href="index.php" style="display:inline-block; padding:7px 12px; background:#caa600; color:white; border-radius:5px; text-decoration:none;">Klik Versi Baru ⬇️</a>
@@ -77,13 +72,12 @@
     </div>
 
 <script>
-/* ==========================
-   FUNGSI TERBILANG DI JS
-   ========================== */
-
+/* ================================
+   FUNGSI SATUAN & TERBILANG
+   ================================ */
 function satuan(n) {
-    return ["", "satu", "dua", "tiga", "empat", "lima", 
-            "enam", "tujuh", "delapan", "sembilan", 
+    return ["", "satu", "dua", "tiga", "empat", "lima",
+            "enam", "tujuh", "delapan", "sembilan",
             "sepuluh", "sebelas"][n] || "";
 }
 
@@ -107,10 +101,31 @@ function terbilang(n) {
     }
 }
 
-/* ==========================
-   JS FORM INTERACTION
-   ========================== */
+/* ================================
+   FUNGSI ALERT OTOMATIS
+   ================================ */
+function showAlert(msg, type="success") {
+    // Hapus alert sebelumnya
+    $("#alertArea").html("");
 
+    let alertBox = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${msg}
+        </div>
+    `;
+
+    $("#alertArea").html(alertBox);
+
+    // Auto close 2.5 detik
+    setTimeout(() => {
+        $(".alert").alert('close');
+    }, 2500);
+}
+
+
+/* ================================
+   FORM INTERACTION
+   ================================ */
 $(document).ready(function(){
 
     $('#convertForm').on('submit', function(e){
@@ -119,7 +134,7 @@ $(document).ready(function(){
         let number = $('#number').val().replace(/[,\.]/g, "");
 
         if (!/^\d+$/.test(number)) {
-            $('#result').html("<b>Masukkan angka yang valid.</b>");
+            showAlert("Masukkan angka yang valid!", "danger");
             return;
         }
 
@@ -127,12 +142,17 @@ $(document).ready(function(){
         $('#copyButton').show();
     });
 
+
+    // COPY BUTTON
     $('#copyButton').on('click', function(){
         let text = $('#result').text();
-        navigator.clipboard.writeText(text);
-        alert("Tersalin, segera Paste (CTRL + V).");
+        navigator.clipboard.writeText(text).then(() => {
+            showAlert("Tersalin! Gunakan CTRL + V untuk menempel.");
+        });
     });
 
+
+    // RESET BUTTON
     $('#resetButton').on('click', function(){
         $('#convertForm')[0].reset();
         $('#result').html("");
