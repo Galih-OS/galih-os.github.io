@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting...</title>
+</head>
+<body>
+<script>
+async function redirect(){
+  let links = await fetch("links.json").then(r=>r.json());
+
+  let code = window.location.pathname.replace("/", "");
+  if (links[code]){
+    window.location.href = links[code];
+  } else {
+    document.body.innerHTML = "<h2>Short URL tidak ditemukan.</h2>";
+  }
+}
+
+redirect();
+</script>
+</body>
+</html>
