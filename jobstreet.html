@@ -85,5 +85,58 @@ document.getElementById('checkBtn').addEventListener('click', async () => {
   }
 });
 </script>
+
+  <!-- BLOKIR KLIK KANAN + F12 + CTRL+U (VERSI TERKUAT) -->
+<script>
+// Blok klik kanan
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+// Blok kombinasi keyboard
+function blockKeys(e) {
+  // F12
+  if (e.key === "F12" || e.code === "F12") {
+    e.preventDefault();
+    return false;
+  }
+
+  // CTRL + U
+  if (e.ctrlKey && (e.key === "u" || e.key === "U" || e.code === "KeyU")) {
+    e.preventDefault();
+    return false;
+  }
+
+  // CTRL + SHIFT + I/J/C
+  if (e.ctrlKey && e.shiftKey && (
+    e.key === "I" || e.key === "i" ||
+    e.key === "J" || e.key === "j" ||
+    e.key === "C" || e.key === "c"
+  )) {
+    e.preventDefault();
+    return false;
+  }
+}
+
+document.addEventListener("keydown", blockKeys);
+document.addEventListener("keyup", blockKeys);
+window.addEventListener("keydown", blockKeys);
+window.addEventListener("keyup", blockKeys);
+
+// Blok select (opsional)
+document.addEventListener("selectstart", e => e.preventDefault());
+
+// Blok inspect-devtools (opsional)
+let devtools = false;
+setInterval(() => {
+  const start = performance.now();
+  debugger;
+  const end = performance.now();
+  if (end - start > 100) {
+    devtools = true;
+    document.body.innerHTML =
+      "<h2 style='text-align:center;margin-top:40px;color:red;'>Developer Tools Tidak Diizinkan</h2>";
+  }
+}, 200);
+</script> 
+  
 </body>
 </html>
