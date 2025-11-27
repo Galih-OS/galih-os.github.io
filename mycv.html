@@ -112,12 +112,11 @@
 /*
   Mechanism:
   - Compare SHA-256 hash of entered password to storedHash.
-  - storedHash diset ke hash dari "12qwerty%OK".
   - Jika browser tidak mendukung SubtleCrypto, fallback ke perbandingan string (kurang aman).
 */
 
-/* ===== UBAH HASH DI SINI JIKA INGIN PASSWORD LAIN (hex SHA-256) ===== */
-const storedHash = '85e248fbc76bafa65c5dff412f893d8e88b5dfab0ec299332c643b99c720b4ac'; // hash untuk "12qwerty%OK"
+/* ===== HASH  ===== */
+const storedHash = '85e248fbc76bafa65c5dff412f893d8e88b5dfab0ec299332c643b99c720b4ac';
 
 const overlay = document.getElementById('pw-overlay');
 const input = document.getElementById('pw-input');
@@ -134,7 +133,7 @@ function toHex(buffer) {
   return Array.from(b).map(x => x.toString(16).padStart(2,'0')).join('');
 }
 
-/* compute SHA-256 using SubtleCrypto */
+/* compute using SubtleCrypto */
 async function sha256Hex(str) {
   if (window.crypto && crypto.subtle && crypto.subtle.digest) {
     const enc = new TextEncoder();
