@@ -4,6 +4,17 @@
 
 <!-- Mirrored from themesdesign.in/harold/layout/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 Apr 2023 05:55:53 GMT -->
 <head>
+	<script>
+const links = document.querySelectorAll('a[href]');
+links.forEach(link => {
+  const url = link.href;
+  const prefetch = document.createElement('link');
+  prefetch.rel = 'prefetch';
+  prefetch.href = url;
+  document.head.appendChild(prefetch);
+});
+</script>
+	
 	<!--adsense-->
 	<meta name="google-adsense-account" content="ca-pub-9607610058453393">
 	<script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
