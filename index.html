@@ -229,6 +229,80 @@
       .footer-inner { display:block; text-align:center; }
       .footer-inner div:last-child { margin-top:8px; }
     }
+
+/* ================================
+   SKILL PROGRESS BAR
+================================ */
+
+.bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #00d4ff,
+    #7c3aed,
+    #ec4899
+  );
+
+  box-shadow:
+    0 0 8px rgba(0, 212, 255, 0.5),
+    0 0 18px rgba(124, 58, 237, 0.35);
+
+  animation: skillFill 2s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+
+.bar span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.65),
+    transparent
+  );
+
+  animation: skillShine 2.5s ease-in-out infinite;
+}
+
+@keyframes skillFill {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: var(--w);
+  }
+}
+
+@keyframes skillShine {
+  from {
+    left: -30%;
+  }
+
+  to {
+    left: 130%;
+  }
+}
+
+
+
   </style>
 </head>
 
@@ -303,25 +377,49 @@
             </div>
           </div>
 
-          <div class="card skills reveal">
-            <span class="eyebrow">Skills</span>
-            <div class="skill">
-              <div class="skill-top"><span>HTML • SQL • Local Networking</span><span></span></div>
-              <div class="bar"><span style="--w:100%"></span></div>
+            <div class="card skills reveal">
+              <span class="eyebrow">Skills</span>
+
+              <div class="skill">
+                <div class="skill-top">
+                  <span>HTML • SQL • Local Networking</span>
+                  <span></span>
+                </div>
+                <div class="bar">
+                  <span style="--w:100%"></span>
+                </div>
+              </div>
+
+              <div class="skill">
+                <div class="skill-top">
+                  <span>MS Office • Excel • Photoshop</span>
+                  <span></span>
+                </div>
+                <div class="bar">
+                  <span style="--w:100%"></span>
+                </div>
+              </div>
+
+              <div class="skill">
+                <div class="skill-top">
+                  <span>Windows Server • Linux • Windows 7–11</span>
+                  <span></span>
+                </div>
+                <div class="bar">
+                  <span style="--w:100%"></span>
+                </div>
+              </div>
+
+              <div class="skill">
+                <div class="skill-top">
+                  <span>IT Help Desk & Troubleshooting</span>
+                  <span></span>
+                </div>
+                <div class="bar">
+                  <span style="--w:100%"></span>
+                </div>
+              </div>
             </div>
-            <div class="skill">
-              <div class="skill-top"><span>MS Office • Excel • Photoshop</span><span></span></div>
-              <div class="bar"><span style="--w:100%"></span></div>
-            </div>
-            <div class="skill">
-              <div class="skill-top"><span>Windows Server • Linux • Windows 7–11</span><span></span></div>
-              <div class="bar"><span style="--w:100%"></span></div>
-            </div>
-            <div class="skill">
-              <div class="skill-top"><span>IT Help Desk & Troubleshooting</span><span></span></div>
-              <div class="bar"><span style="--w:100%"></span></div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
