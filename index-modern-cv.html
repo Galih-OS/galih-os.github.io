@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Galih OS — IT Staff, Financial Administration, Web Developer and Technology Enthusiast.">
+  <meta name="keywords" content="Galih OS, IT Staff, Web Developer, IT Help Desk, SQL, HTML, Networking">
+  <meta name="author" content="Galih OS">
+  <title>Galih OS — CV & Portfolio</title>
+
+  <link rel="icon" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    :root {
+      --bg: #070b14;
+      --bg-soft: #0d1322;
+      --card: rgba(16, 23, 39, .72);
+      --card-solid: #101727;
+      --text: #f5f7fb;
+      --muted: #98a2b3;
+      --line: rgba(255,255,255,.09);
+      --accent: #7c5cff;
+      --accent-2: #18c8ff;
+      --success: #37d39a;
+      --shadow: 0 24px 80px rgba(0,0,0,.32);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(124,92,255,.17), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(24,200,255,.12), transparent 28%),
+        var(--bg);
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .section { padding: 110px 0; position: relative; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #c8c1ff; font-size: .78rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: ""; width: 28px; height: 2px; background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      border-radius: 99px;
+    }
+    h1,h2,h3,h4 { font-family: "Space Grotesk", sans-serif; line-height: 1.1; margin-top: 0; }
+    h2 { font-size: clamp(2rem, 4vw, 3.4rem); margin: 12px 0 18px; }
+    .muted { color: var(--muted); }
+
+    /* NAV */
+    .nav {
+      position: fixed; inset: 0 0 auto; z-index: 1000;
+      padding: 18px 0;
+      transition: .3s ease;
+    }
+    .nav.scrolled {
+      background: rgba(7,11,20,.76);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; }
+    .brand { font-family:"Space Grotesk"; font-weight:800; font-size:1.15rem; letter-spacing:-.04em; }
+    .brand span { color: var(--accent-2); }
+    .nav-links { display:flex; gap: 28px; align-items:center; }
+    .nav-links a { color:#b9c0cf; font-size:.9rem; font-weight:600; transition:.2s; }
+    .nav-links a:hover { color:white; }
+    .nav-cta {
+      padding: 9px 15px; border:1px solid var(--line); border-radius:12px;
+      background:rgba(255,255,255,.04);
+    }
+    .menu { display:none; background:none; color:white; border:0; font-size:1.6rem; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display:flex; align-items:center; padding:150px 0 90px; overflow:hidden; }
+    .hero-grid { display:grid; grid-template-columns: 1.08fr .92fr; gap:70px; align-items:center; }
+    .status {
+      display:inline-flex; align-items:center; gap:9px; padding:7px 11px;
+      border:1px solid rgba(55,211,154,.22); border-radius:999px;
+      background:rgba(55,211,154,.06); color:#8af0c7; font-size:.8rem; font-weight:600;
+    }
+    .status i { width:8px; height:8px; border-radius:50%; background:var(--success); box-shadow:0 0 14px var(--success); }
+    .hero h1 { font-size:clamp(3.2rem, 8vw, 6.8rem); letter-spacing:-.075em; margin:22px 0 18px; }
+    .gradient { background:linear-gradient(110deg,#fff 15%,#bdb5ff 55%,#69ddff); -webkit-background-clip:text; color:transparent; }
+    .typing { color:#aeb7c9; min-height:2rem; font-size:1.08rem; }
+    .hero-copy { max-width:650px; color:#a5afc1; font-size:1rem; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
+    .btn {
+      display:inline-flex; align-items:center; gap:9px; padding:13px 18px;
+      border-radius:14px; border:1px solid var(--line); font-weight:700; font-size:.9rem;
+      transition:.25s; cursor:pointer;
+    }
+    .btn-primary { background:linear-gradient(135deg,var(--accent),#5a83ff); border-color:transparent; }
+    .btn-secondary { background:rgba(255,255,255,.04); }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(0,0,0,.2); }
+
+    .profile-wrap { position:relative; display:grid; place-items:center; }
+    .profile-glow {
+      position:absolute; width:360px; height:360px; border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2)); filter:blur(80px); opacity:.24;
+    }
+    .profile-card {
+      position:relative; width:min(390px,100%); aspect-ratio: .88;
+      border:1px solid var(--line); border-radius:32px; overflow:hidden;
+      background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.02));
+      box-shadow:var(--shadow); transform:rotate(2deg);
+    }
+    .profile-card img { width:100%; height:100%; object-fit:cover; }
+    .profile-label {
+      position:absolute; left:18px; right:18px; bottom:18px;
+      padding:14px 16px; border-radius:18px; background:rgba(7,11,20,.7);
+      backdrop-filter:blur(15px); border:1px solid var(--line);
+    }
+    .profile-label strong { display:block; font-family:"Space Grotesk"; font-size:1.05rem; }
+    .profile-label small { color:#a8b0bf; }
+
+    /* COMMON */
+    .section-head { max-width:700px; margin-bottom:42px; }
+    .card {
+      background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+      box-shadow:var(--shadow); backdrop-filter:blur(18px);
+    }
+
+    /* ABOUT */
+    .about-grid { display:grid; grid-template-columns:.75fr 1.25fr; gap:22px; }
+    .about-intro { padding:32px; }
+    .about-intro h3 { font-size:1.7rem; }
+    .facts { display:grid; gap:12px; margin-top:26px; }
+    .fact { display:flex; justify-content:space-between; gap:15px; padding-bottom:12px; border-bottom:1px solid var(--line); font-size:.88rem; }
+    .fact span:first-child { color:var(--muted); }
+    .skills { padding:32px; }
+    .skill { margin:23px 0; }
+    .skill-top { display:flex; justify-content:space-between; margin-bottom:9px; font-size:.88rem; font-weight:700; }
+    .bar { height:8px; background:#20283a; border-radius:99px; overflow:hidden; }
+    .bar span { display:block; height:100%; width:var(--w); border-radius:99px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); }
+
+    /* TIMELINE */
+    .timeline { position:relative; padding-left:28px; }
+    .timeline::before { content:""; position:absolute; left:5px; top:8px; bottom:8px; width:1px; background:linear-gradient(var(--accent),var(--accent-2),transparent); }
+    .timeline-item { position:relative; padding:0 0 35px 25px; }
+    .timeline-item::before {
+      content:""; position:absolute; left:-1px; top:8px; width:11px; height:11px;
+      border-radius:50%; background:var(--bg); border:3px solid var(--accent-2); box-shadow:0 0 15px rgba(24,200,255,.4);
+    }
+    .year { color:#7f8aa0; font-size:.8rem; font-weight:700; letter-spacing:.08em; }
+    .timeline h3 { margin:6px 0 6px; font-size:1.15rem; }
+    .timeline p { margin:0; color:var(--muted); font-size:.92rem; }
+
+    /* CERTS */
+    .cert-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+    .cert {
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+      padding:18px 20px; border:1px solid var(--line); border-radius:17px;
+      background:rgba(255,255,255,.025); transition:.2s;
+    }
+    .cert:hover { border-color:rgba(124,92,255,.5); transform:translateY(-2px); }
+    .cert i { color:#a99cff; font-size:1.2rem; }
+    .cert span { flex:1; font-weight:600; font-size:.9rem; }
+    .cert a { color:#8edfff; }
+
+    /* BLOG */
+    .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .blog-card { overflow:hidden; }
+    .blog-image { aspect-ratio:16/9; overflow:hidden; }
+    .blog-image img { width:100%; height:100%; object-fit:cover; transition:.5s; }
+    .blog-card:hover .blog-image img { transform:scale(1.05); }
+    .blog-body { padding:24px; }
+    .tag { display:inline-block; font-size:.72rem; color:#a9a0ff; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
+    .blog-body h3 { margin:9px 0; font-size:1.18rem; }
+    .blog-body p { color:var(--muted); font-size:.86rem; }
+
+    /* CONTACT */
+    .contact-box {
+      padding:42px; display:flex; align-items:center; justify-content:space-between; gap:30px;
+      background:
+        radial-gradient(circle at 90% 0%,rgba(24,200,255,.14),transparent 30%),
+        radial-gradient(circle at 0% 100%,rgba(124,92,255,.18),transparent 35%),
+        var(--card);
+    }
+    .socials { display:flex; gap:10px; flex-wrap:wrap; }
+    .social {
+      width:43px; height:43px; display:grid; place-items:center; border:1px solid var(--line);
+      border-radius:13px; background:rgba(255,255,255,.04); font-size:1.15rem; transition:.2s;
+    }
+    .social:hover { transform:translateY(-3px); border-color:#7d71ff; }
+
+    footer { border-top:1px solid var(--line); padding:25px 0; color:#717b8e; font-size:.8rem; }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; }
+
+    /* REVEAL */
+    .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s ease,transform .7s ease; }
+    .reveal.visible { opacity:1; transform:none; }
+
+    @media (max-width: 900px) {
+      .hero-grid,.about-grid { grid-template-columns:1fr; }
+      .hero { padding-top:125px; }
+      .profile-wrap { order:-1; }
+      .profile-card { width:min(320px,90%); }
+      .blog-grid { grid-template-columns:1fr; }
+      .cert-grid { grid-template-columns:1fr; }
+      .contact-box { display:block; }
+      .contact-box .socials { margin-top:25px; }
+    }
+    @media (max-width: 700px) {
+      .container { width:min(var(--max),calc(100% - 28px)); }
+      .section { padding:80px 0; }
+      .nav-links {
+        display:none; position:absolute; left:14px; right:14px; top:64px; padding:14px;
+        flex-direction:column; align-items:stretch; gap:4px; background:#0d1322;
+        border:1px solid var(--line); border-radius:18px;
+      }
+      .nav-links.open { display:flex; }
+      .nav-links a { padding:11px 12px; }
+      .menu { display:block; }
+      .hero h1 { font-size:clamp(3rem,16vw,5rem); }
+      .contact-box { padding:28px; }
+      .footer-inner { display:block; text-align:center; }
+      .footer-inner div:last-child { margin-top:8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav" id="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#home">Galih<span>OS.</span></a>
+      <button class="menu" id="menuBtn" aria-label="Buka menu"><i class="bi bi-list"></i></button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#blog">Blog</a>
+        <a href="jobstreet.html" target="_blank" class="nav-cta">Jobstreet <i class="bi bi-arrow-up-right"></i></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="status"><i></i> Available for professional opportunities</div>
+          <h1>Galih <span class="gradient">OS.</span></h1>
+          <div class="typing"><span id="typed"></span><span aria-hidden="true">|</span></div>
+          <p class="hero-copy">
+            IT Staff, web developer, technology enthusiast, blogger, dan vlogger.
+            Berfokus pada pengembangan sistem berbasis web, troubleshooting,
+            database, jaringan lokal, serta administrasi yang membutuhkan ketelitian dan solusi praktis.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#about"><i class="bi bi-person-vcard"></i> Lihat CV</a>
+            <a class="btn btn-secondary" href="#contact"><i class="bi bi-chat-dots"></i> Hubungi Saya</a>
+          </div>
+        </div>
+
+        <div class="profile-wrap reveal">
+          <div class="profile-glow"></div>
+          <div class="profile-card">
+            <img src="images/home/home.png" alt="Galih OS">
+            <div class="profile-label">
+              <strong>IT • Web • Administration</strong>
+              <small>Build systems. Solve problems. Keep learning.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Profile</span>
+          <h2>About Me</h2>
+          <p class="muted">Teknologi, administrasi, dan rasa ingin tahu menjadi bagian dari perjalanan profesional saya.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="card about-intro reveal">
+            <h3>Problem solver dengan mindset teknologi.</h3>
+            <p class="muted">
+              Saya memiliki pengalaman dalam pengembangan website, sistem informasi,
+              troubleshooting perangkat dan sistem operasi, database, serta local networking.
+              Di luar pekerjaan, saya menikmati aktivitas menulis, blogging, dan eksplorasi teknologi.
+            </p>
+            <div class="facts">
+              <div class="fact"><span>Role</span><strong>IT Staff</strong></div>
+              <div class="fact"><span>Focus</span><strong>Web & IT Support</strong></div>
+              <div class="fact"><span>Education</span><strong>Bachelor of Computer Science</strong></div>
+              <div class="fact"><span>Portfolio</span><strong>Galih-OS</strong></div>
+            </div>
+          </div>
+
+          <div class="card skills reveal">
+            <span class="eyebrow">Skills</span>
+            <div class="skill">
+              <div class="skill-top"><span>HTML • SQL • Local Networking</span><span>Advanced</span></div>
+              <div class="bar"><span style="--w:92%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="skill-top"><span>MS Office • Excel • Photoshop</span><span>Advanced</span></div>
+              <div class="bar"><span style="--w:90%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="skill-top"><span>Windows Server • Linux • Windows 7–11</span><span>Advanced</span></div>
+              <div class="bar"><span style="--w:88%"></span></div>
+            </div>
+            <div class="skill">
+              <div class="skill-top"><span>IT Help Desk & Troubleshooting</span><span>Advanced</span></div>
+              <div class="bar"><span style="--w:90%"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Career</span>
+          <h2>Experience & Education</h2>
+          <p class="muted">Beberapa pengalaman pengembangan sistem dan perjalanan pendidikan yang tercantum dalam CV.</p>
+        </div>
+
+        <div class="card" style="padding:34px;">
+          <div class="timeline">
+            <div class="timeline-item reveal">
+              <span class="year">2016</span>
+              <h3>Website-Based Information Development</h3>
+              <p>SMA Wachid Hasyim 5.</p>
+            </div>
+            <div class="timeline-item reveal">
+              <span class="year">2018</span>
+              <h3>Website-Based School Exam Application</h3>
+              <p>SMA IPIEMS Surabaya.</p>
+            </div>
+            <div class="timeline-item reveal">
+              <span class="year">2018</span>
+              <h3>Website-Based Information Development</h3>
+              <p>Kindergarten Hospital III Brawijaya Surabaya.</p>
+            </div>
+            <div class="timeline-item reveal">
+              <span class="year">2020</span>
+              <h3>Salary & Allowance Information System</h3>
+              <p>Surabaya City Regional Financial and Tax Management Agency (Government).</p>
+            </div>
+            <div class="timeline-item reveal">
+              <span class="year">2013 — 2018</span>
+              <h3>Bachelor of Computer Science</h3>
+              <p>Pendidikan formal di bidang ilmu komputer.</p>
+            </div>
+            <div class="timeline-item reveal">
+              <span class="year">2011</span>
+              <h3>Basic Windows, Multimedia & Internet</h3>
+              <p>Pelatihan dasar komputer, multimedia, dan internet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certifications">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Credentials</span>
+          <h2>Certifications</h2>
+          <p class="muted">Sertifikasi dan bukti kompetensi yang tercantum pada website sebelumnya.</p>
+        </div>
+
+        <div class="cert-grid">
+          <div class="cert reveal"><i class="bi bi-database"></i><span>Structured Query Language — SQL</span><a href="https://www.sololearn.com/certificates/CT-IWFI8SDZ" target="_blank" rel="noopener">View <i class="bi bi-arrow-up-right"></i></a></div>
+          <div class="cert reveal"><i class="bi bi-code-slash"></i><span>JAVA</span><a href="https://www.sololearn.com/certificates/CT-C9WYYTOZ" target="_blank" rel="noopener">View <i class="bi bi-arrow-up-right"></i></a></div>
+          <div class="cert reveal"><i class="bi bi-phone"></i><span>Responsive Web Design</span><a href="https://www.sololearn.com/certificates/CT-OHGAVAY8" target="_blank" rel="noopener">View <i class="bi bi-arrow-up-right"></i></a></div>
+          <div class="cert reveal"><i class="bi bi-filetype-html"></i><span>HyperText Markup Language — HTML</span><a href="https://www.sololearn.com/certificates/CT-2ELNBCL3" target="_blank" rel="noopener">View <i class="bi bi-arrow-up-right"></i></a></div>
+          <div class="cert reveal"><i class="bi bi-headset"></i><span>Professional Certification — IT Help Desk</span><a href="https://github.com/Galih-OS/galih-os.github.io/blob/main/images/28.jpg" target="_blank" rel="noopener">View <i class="bi bi-arrow-up-right"></i></a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="blog">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Writing</span>
+          <h2>Blog & Interests</h2>
+          <p class="muted">Tempat berbagi cerita, teknologi, dan berbagai catatan personal.</p>
+        </div>
+
+        <div class="blog-grid">
+          <a class="card blog-card reveal" href="https://e-galihos.blogspot.com/search/label/Alkisah" target="_blank" rel="noopener">
+            <div class="blog-image"><img src="images/blog/img1.jpg" alt="Alkisah"></div>
+            <div class="blog-body">
+              <span class="tag">Alkisah</span>
+              <h3>Coretan Alkisah dalam Blogger</h3>
+              <p>Seputar alkisah yang tersusun dan dibingkai secara humanize.</p>
+            </div>
+          </a>
+          <a class="card blog-card reveal" href="https://e-galihos.blogspot.com/search/label/Intelijen" target="_blank" rel="noopener">
+            <div class="blog-image"><img src="images/blog/img2.jpg" alt="Intelijen"></div>
+            <div class="blog-body">
+              <span class="tag">Intelijen</span>
+              <h3>Coretan Sekolah Intelijen</h3>
+              <p>Gambaran cerita dan coretan seputar dunia intelijen dan metode yang diterapkan.</p>
+            </div>
+          </a>
+          <a class="card blog-card reveal" href="https://e-galihos.blogspot.com/search/label/Teknologi" target="_blank" rel="noopener">
+            <div class="blog-image"><img src="images/blog/img4.jpg" alt="Teknologi"></div>
+            <div class="blog-body">
+              <span class="tag">Technology</span>
+              <h3>Teknologi</h3>
+              <p>Pembaruan dan pengetahuan seputar dunia teknologi konvensional maupun digital.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="card contact-box reveal">
+          <div>
+            <span class="eyebrow">Get in touch</span>
+            <h2 style="margin-bottom:10px;">Let's connect.</h2>
+            <p class="muted" style="margin:0;max-width:600px;">
+              Untuk mengenal dan mengetahui informasi lebih lanjut, silakan terhubung melalui kanal berikut.
+            </p>
+          </div>
+          <div class="socials">
+            <a class="social" href="https://t.me/galihos" target="_blank" rel="noopener" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+            <a class="social" href="https://www.instagram.com/galihoktasiwi/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a class="social" href="https://github.com/Galih-OS" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+            <a class="social" href="https://e-galihos.blogspot.com" target="_blank" rel="noopener" aria-label="Blog"><i class="bi bi-journal-text"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> <strong>Galih-OS.</strong> All rights reserved.</div>
+      <div>Built with curiosity & technology.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky navigation
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Typing effect
+    const words = ['IT Staff', 'Web Developer', 'Financial Administration', 'IT Help Desk', 'Technology Enthusiast'];
+    const typed = document.getElementById('typed');
+    let wi = 0, ci = 0, deleting = false;
+    function typeLoop() {
+      const word = words[wi];
+      typed.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+      if (!deleting && ci > word.length) {
+        deleting = true;
+        setTimeout(typeLoop, 1500);
+        return;
+      }
+      if (deleting && ci < 0) {
+        deleting = false; ci = 0; wi = (wi + 1) % words.length;
+      }
+      setTimeout(typeLoop, deleting ? 45 : 85);
+    }
+    typeLoop();
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
