@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator PDAM Gresik (R3)</title>
+    <style>
+        :root {
+            --primary-color: #0284c7;
+            --primary-dark: #0369a1;
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .app-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 450px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .body-content {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-color);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 1rem;
+            border: 1.5px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.2s;
+            background: #f8fafc;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--primary-color);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .helper-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .converted-val {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .btn-calc {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 5px;
+        }
+
+        .btn-calc:active {
+            background-color: var(--primary-dark);
+            transform: scale(0.99);
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 16px;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .result-row:last-child {
+            margin-bottom: 0;
+            padding-top: 10px;
+            border-top: 1px dashed #7dd3fc;
+        }
+
+        .result-label {
+            color: var(--text-muted);
+        }
+
+        .result-value {
+            font-weight: 600;
+        }
+
+        .total-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #0369a1;
+        }
+
+        .note-min {
+            font-size: 0.75rem;
+            color: #d97706;
+            background: #fef3c7;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 360px) {
+            body { padding: 10px; }
+            .header { padding: 18px 15px; }
+            .body-content { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-card">
+    <div class="header">
+        <h1>PDAM Giri Tirta Gresik</h1>
+        <p>Kalkulator Tagihan Meter Air Bulanan</p>
+        <span class="badge">Tarif Rumah Tangga (R3)</span>
+    </div>
+
+    <div class="body-content">
+        <div class="input-group">
+            <label for="meterLalu">Meteran Bulan Lalu (7 Digit):</label>
+            <div class="input-wrapper">
+                <input type="number" id="meterLalu" placeholder="Contoh: 0001241" oninput="prosesInput('Lalu')">
+            </div>
+            <div class="helper-text">
+                Dibaca m³: <span id="m3Lalu" class="converted-val">-</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="meterIni">Meteran Bulan Ini (7 Digit):</label>
+            <div class="input-wrapper">
+                <input type="number" id="meterIni" placeholder="Contoh: 0001541" oninput="prosesInput('Ini')">
+            </div>
+            <div class="helper-text">
+                Dibaca m³: <span id="m3Ini" class="converted-val">-</span>
+            </div>
+        </div>
+
+        <button class="btn-calc" onclick="hitungBulan()">Hitung Tagihan Air</button>
+
+        <div id="resultBox" class="result-box">
+            <div class="result-row">
+                <span class="result-label">Pemakaian Air:</span>
+                <span id="resPemakaian" class="result-value">0 m³</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Dasar Perhitungan:</span>
+                <span id="resDasarHitung" class="result-value">0 m³</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Estimasi Biaya:</span>
+                <span id="resBiaya" class="total-price">Rp0</span>
+            </div>
+            <div id="noteMin" class="note-min" style="display: none;">
+                ℹ️ Pemakaian di bawah 10 m³ tetap dikenakan biaya minimum pemakaian 10 m³ (Rp20.500).
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Database Tabel Tarif R3 Gresik (10 m3 s.d 150 m3)
+    const tarifR3 = {
+        10: 20500, 11: 24850, 12: 29200, 13: 33550, 14: 37900, 15: 42250, 
+        16: 46600, 17: 50950, 18: 55300, 19: 59650, 20: 64000, 21: 68800, 
+        22: 73600, 23: 78400, 24: 83200, 25: 88000, 26: 92800, 27: 97600, 
+        28: 102400, 29: 107200, 30: 112000, 31: 117750, 32: 123500, 33: 129250, 
+        34: 135000, 35: 140750, 36: 146500, 37: 152250, 38: 158000, 39: 163750, 
+        40: 169500, 41: 175250, 42: 181000, 43: 186750, 44: 192500, 45: 198250, 
+        46: 204000, 47: 209750, 48: 215500, 49: 221250, 50: 227000, 51: 232750, 
+        52: 238500, 53: 244250, 54: 250000, 55: 255750, 56: 261500, 57: 267250, 
+        58: 273000, 59: 278750, 60: 284500, 61: 290250, 62: 296000, 63: 301750, 
+        64: 307500, 65: 313250, 66: 319000, 67: 324750, 68: 330500, 69: 336250, 
+        70: 342000, 71: 347750, 72: 353500, 73: 359250, 74: 365000, 75: 370750, 
+        76: 376500, 77: 382250, 78: 388000, 79: 393750, 80: 399500, 81: 405250, 
+        82: 411000, 83: 416750, 84: 422500, 85: 428250, 86: 434000, 87: 439750, 
+        88: 445500, 89: 451250, 90: 457000, 91: 462750, 92: 468500, 93: 474250, 
+        94: 480000, 95: 485750, 96: 491500, 97: 497250, 98: 503000, 99: 508750, 
+        100: 514500, 101: 520250, 102: 526000, 103: 531750, 104: 537500, 105: 543250, 
+        106: 549000, 107: 554750, 108: 560500, 109: 566250, 110: 572000, 111: 577750, 
+        112: 583500, 113: 589250, 114: 595000, 115: 600750, 116: 606500, 117: 612250, 
+        118: 618000, 119: 623750, 120: 629500, 121: 635250, 122: 641000, 123: 646750, 
+        124: 652500, 125: 658250, 126: 664000, 127: 669750, 128: 675500, 129: 681250, 
+        130: 687000, 131: 692750, 132: 698500, 133: 704250, 134: 710000, 135: 715750, 
+        136: 721500, 137: 727250, 138: 733000, 139: 738750, 140: 744500, 141: 750250, 
+        142: 756000, 143: 761750, 144: 767500, 145: 773250, 146: 779000, 147: 784750, 
+        148: 790500, 149: 796250, 150: 802000
+    };
+
+    // Fungsi konversi angka (memotong 3 angka belakang)
+    function dapatkanM3(val) {
+        if (!val || val === "") return null;
+        let numStr = val.toString();
+        
+        // Jika angka kurang dari 4 digit, anggap m3 = 0 (karena 3 digit belakang desimal)
+        if (numStr.length <= 3) {
+            return 0;
+        }
+        
+        // Memotong 3 digit terakhir
+        let m3Str = numStr.substring(0, numStr.length - 3);
+        return parseInt(m3Str, 10);
+    }
+
+    // Update realtime teks preview m3
+    function prosesInput(tipe) {
+        let inputVal = document.getElementById('meter' + tipe).value;
+        let m3Val = dapatkanM3(inputVal);
+        let targetEl = document.getElementById('m3' + tipe);
+
+        if (m3Val !== null) {
+            targetEl.innerText = m3Val + " m³";
+        } else {
+            targetEl.innerText = "-";
+        }
+    }
+
+    // Fungsi utama hitung tagihan
+    function hitungBulan() {
+        let valLalu = document.getElementById('meterLalu').value;
+        let valIni = document.getElementById('meterIni').value;
+
+        if (valLalu === "" || valIni === "") {
+            alert("Mohon isi kedua angka meteran air terlebih dahulu!");
+            return;
+        }
+
+        let m3Lalu = dapatkanM3(valLalu);
+        let m3Ini = dapatkanM3(valIni);
+
+        if (m3Ini < m3Lalu) {
+            alert("Meteran bulan ini tidak boleh lebih kecil dari bulan lalu!");
+            return;
+        }
+
+        let selisih = m3Ini - m3Lalu;
+        let m3Dihitung = selisih;
+        let isMinimum = false;
+
+        // Pemakaian di bawah 10 m3 tetap dihitung 10 m3 (minimum charge)
+        if (m3Dihitung < 10) {
+            m3Dihitung = 10;
+            isMinimum = true;
+        }
+
+        let totalBiaya = 0;
+
+        if (tarifR3[m3Dihitung]) {
+            totalBiaya = tarifR3[m3Dihitung];
+        } else if (m3Dihitung > 150) {
+            // Estimasi jika di atas 150 m3 (mengikuti pola +5750/m3)
+            totalBiaya = 802000 + ((m3Dihitung - 150) * 5750);
+        }
+
+        // Tampilkan hasil
+        document.getElementById('resPemakaian').innerText = selisih + " m³";
+        document.getElementById('resDasarHitung').innerText = m3Dihitung + " m³";
+        document.getElementById('resBiaya').innerText = "Rp " + totalBiaya.toLocaleString('id-ID');
+
+        document.getElementById('noteMin').style.display = isMinimum ? 'block' : 'none';
+        document.getElementById('resultBox').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
