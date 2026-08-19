@@ -156,7 +156,7 @@
             font-size: 0.9rem;
         }
 
-        .result-row:last-child {
+        .result-row.total {
             margin-bottom: 0;
             padding-top: 10px;
             border-top: 1px dashed #7dd3fc;
@@ -244,8 +244,16 @@
                 <span id="resDasarHitung" class="result-value">0 m³</span>
             </div>
             <div class="result-row">
-                <span class="result-label">Estimasi Biaya:</span>
-                <span id="resBiaya" class="total-price">Rp0</span>
+                <span class="result-label">Biaya Air:</span>
+                <span id="resBiayaAir" class="result-value">Rp0</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Biaya Admin:</span>
+                <span id="resBiayaAdmin" class="result-value">Rp3.000</span>
+            </div>
+            <div class="result-row total">
+                <span class="result-label" style="font-weight: 700; color: #1e293b;">Total Bayar:</span>
+                <span id="resTotal" class="total-price">Rp0</span>
             </div>
             <div id="noteMin" class="note-min" style="display: none;">
                 ℹ️ Pemakaian di bawah 10 m³ tetap dikenakan biaya minimum pemakaian 10 m³ (Rp20.500).
@@ -254,11 +262,14 @@
     </div>
 
     <div class="footer">
-        Galih - OS
+        Aplikasi made in Galih - OS
     </div>
 </div>
 
 <script>
+    // Biaya Administrasi
+    const BIAYA_ADMIN = 3000;
+
     // Database Tabel Tarif R3 Gresik (10 m3 s.d 150 m3)
     const tarifR3 = {
         10: 20500, 11: 24850, 12: 29200, 13: 33550, 14: 37900, 15: 42250, 
@@ -335,17 +346,21 @@
             isMinimum = true;
         }
 
-        let totalBiaya = 0;
+        let biayaAir = 0;
 
         if (tarifR3[m3Dihitung]) {
-            totalBiaya = tarifR3[m3Dihitung];
+            biayaAir = tarifR3[m3Dihitung];
         } else if (m3Dihitung > 150) {
-            totalBiaya = 802000 + ((m3Dihitung - 150) * 5750);
+            biayaAir = 802000 + ((m3Dihitung - 150) * 5750);
         }
+
+        let totalBayar = biayaAir + BIAYA_ADMIN;
 
         document.getElementById('resPemakaian').innerText = selisih + " m³";
         document.getElementById('resDasarHitung').innerText = m3Dihitung + " m³";
-        document.getElementById('resBiaya').innerText = "Rp " + totalBiaya.toLocaleString('id-ID');
+        document.getElementById('resBiayaAir').innerText = "Rp " + biayaAir.toLocaleString('id-ID');
+        document.getElementById('resBiayaAdmin').innerText = "Rp " + BIAYA_ADMIN.toLocaleString('id-ID');
+        document.getElementById('resTotal').innerText = "Rp " + totalBayar.toLocaleString('id-ID');
 
         document.getElementById('noteMin').style.display = isMinimum ? 'block' : 'none';
         document.getElementById('resultBox').style.display = 'block';
