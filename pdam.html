@@ -39,6 +39,8 @@
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
@@ -71,6 +73,7 @@
 
         .body-content {
             padding: 20px;
+            flex: 1;
         }
 
         .input-group {
@@ -182,6 +185,16 @@
             margin-top: 10px;
         }
 
+        .footer {
+            text-align: center;
+            padding: 14px 20px;
+            background-color: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
         @media (max-width: 360px) {
             body { padding: 10px; }
             .header { padding: 18px 15px; }
@@ -239,6 +252,10 @@
             </div>
         </div>
     </div>
+
+    <div class="footer">
+        Galih - OS
+    </div>
 </div>
 
 <script>
@@ -270,22 +287,16 @@
         148: 790500, 149: 796250, 150: 802000
     };
 
-    // Fungsi konversi angka (memotong 3 angka belakang)
     function dapatkanM3(val) {
         if (!val || val === "") return null;
         let numStr = val.toString();
-        
-        // Jika angka kurang dari 4 digit, anggap m3 = 0 (karena 3 digit belakang desimal)
         if (numStr.length <= 3) {
             return 0;
         }
-        
-        // Memotong 3 digit terakhir
         let m3Str = numStr.substring(0, numStr.length - 3);
         return parseInt(m3Str, 10);
     }
 
-    // Update realtime teks preview m3
     function prosesInput(tipe) {
         let inputVal = document.getElementById('meter' + tipe).value;
         let m3Val = dapatkanM3(inputVal);
@@ -298,7 +309,6 @@
         }
     }
 
-    // Fungsi utama hitung tagihan
     function hitungBulan() {
         let valLalu = document.getElementById('meterLalu').value;
         let valIni = document.getElementById('meterIni').value;
@@ -320,7 +330,6 @@
         let m3Dihitung = selisih;
         let isMinimum = false;
 
-        // Pemakaian di bawah 10 m3 tetap dihitung 10 m3 (minimum charge)
         if (m3Dihitung < 10) {
             m3Dihitung = 10;
             isMinimum = true;
@@ -331,11 +340,9 @@
         if (tarifR3[m3Dihitung]) {
             totalBiaya = tarifR3[m3Dihitung];
         } else if (m3Dihitung > 150) {
-            // Estimasi jika di atas 150 m3 (mengikuti pola +5750/m3)
             totalBiaya = 802000 + ((m3Dihitung - 150) * 5750);
         }
 
-        // Tampilkan hasil
         document.getElementById('resPemakaian').innerText = selisih + " m³";
         document.getElementById('resDasarHitung').innerText = m3Dihitung + " m³";
         document.getElementById('resBiaya').innerText = "Rp " + totalBiaya.toLocaleString('id-ID');
