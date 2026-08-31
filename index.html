@@ -607,6 +607,14 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('a[title]').forEach(function (el) {
+    el.removeAttribute('title');
+  });
+});
+</script>  
   
 </body>
 </html>
