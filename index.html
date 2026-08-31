@@ -599,5 +599,14 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('[title]').forEach(function (el) {
+    el.removeAttribute('title');
+  });
+});
+</script>
+  
 </body>
 </html>
