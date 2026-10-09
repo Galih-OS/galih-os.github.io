@@ -12,12 +12,12 @@ header{background:var(--navy);color:#fff;padding:18px clamp(18px,4vw,48px);displ
 .brand{display:flex;align-items:center;gap:12px;font-size:clamp(20px,2.5vw,28px);font-weight:750;letter-spacing:-.5px}
 .brand svg{width:34px;height:34px}
 .today{display:flex;align-items:center;gap:9px;color:#d7e3f3;font-size:14px}
-main{width:min(900px,calc(100% - 32px));margin:38px auto 48px}
-.hero{text-align:center;margin-bottom:28px}
-.hero-icon{width:76px;height:76px;color:var(--blue);margin-bottom:8px}
-h1{font-size:clamp(32px,5vw,48px);letter-spacing:-1.5px;margin:0 0 8px}
+main{width:min(1180px,calc(100% - 32px));margin:26px auto 32px}
+.hero{text-align:center;margin-bottom:20px}
+.hero-icon{width:58px;height:58px;color:var(--blue);margin-bottom:4px}
+h1{font-size:clamp(30px,4vw,40px);letter-spacing:-1.2px;margin:0 0 6px}
 .subtitle{margin:0;color:var(--muted);font-size:clamp(15px,2vw,19px);line-height:1.5}
-.panel{background:#ffffffed;border:1px solid var(--line);border-radius:16px;padding:clamp(20px,4vw,32px);box-shadow:0 12px 35px #1c41650b;margin-bottom:22px}
+.panel{background:#ffffffed;border:1px solid var(--line);border-radius:16px;padding:clamp(18px,2.5vw,26px);box-shadow:0 12px 35px #1c41650b;margin-bottom:0}
 .panel h2{font-size:20px;margin:0 0 14px}
 .fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .field label{display:block;font-size:13px;color:var(--muted);margin:8px 0 0}
@@ -26,7 +26,7 @@ input[type=date]:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2674e81c}
 button{width:100%;margin-top:22px;border:0;border-radius:9px;background:linear-gradient(100deg,var(--blue),#347eea);color:#fff;padding:15px 18px;font:inherit;font-weight:700;font-size:17px;cursor:pointer;transition:transform .15s,filter .15s}
 button:hover{filter:brightness(.97);transform:translateY(-1px)}button:active{transform:translateY(0)}
 .error{display:none;color:#b42318;background:#fff1f0;border:1px solid #ffd3cf;padding:10px 12px;border-radius:8px;margin-top:14px;font-size:14px}
-.result{background:linear-gradient(120deg,#effaf5,#f5fcf9);border:1px solid #cdebdc;border-radius:16px;padding:clamp(20px,4vw,32px);display:none;box-shadow:0 12px 35px #1c416508}
+.result{background:linear-gradient(120deg,#effaf5,#f5fcf9);border:1px solid #cdebdc;border-radius:16px;padding:clamp(18px,2.5vw,26px);display:none;box-shadow:0 12px 35px #1c416508;align-self:start}
 .result-top{display:flex;align-items:center;gap:22px}
 .avatar{width:82px;height:82px;flex:0 0 82px;border-radius:50%;background:#d0f3e4;color:var(--green);display:grid;place-items:center}
 .avatar svg{width:42px;height:42px}
@@ -41,8 +41,8 @@ button:hover{filter:brightness(.97);transform:translateY(-1px)}button:active{tra
 .stat{background:#fff;border:1px solid #dceee5;border-radius:10px;padding:13px}
 .stat strong{display:block;font-size:21px;color:var(--green)}
 .stat span{font-size:12px;color:var(--muted)}
-footer{text-align:center;color:#8190a3;font-size:12px;margin-top:25px}
-@media(max-width:620px){header{align-items:flex-start}.today{font-size:12px;max-width:145px;text-align:right}.today svg{display:none}.fields{grid-template-columns:1fr;gap:8px}.field label{margin:5px 0 0}.result-top{align-items:flex-start;gap:14px}.avatar{width:58px;height:58px;flex-basis:58px}.avatar svg{width:31px;height:31px}.age-detail{font-size:17px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}}
+footer{text-align:center;color:#8190a3;font-size:12px;margin-top:18px;grid-column:1/-1}
+@media(min-width:860px){main{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);column-gap:22px;align-items:start}.hero{grid-column:1/-1}.panel{grid-column:1}.result{grid-column:2;grid-row:2}.result-top{gap:16px}.avatar{width:64px;height:64px;flex-basis:64px}.avatar svg{width:34px;height:34px}.age{font-size:clamp(32px,3vw,43px)}.age-detail{font-size:18px}.stats{grid-template-columns:1fr}.stat{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px}.stat strong{font-size:18px}.stat span{font-size:12px;text-align:right}.rule{margin:18px 0 14px}.meta{font-size:14px}}\n@media(max-width:859px){.result{margin-top:20px}}\n@media(max-width:620px){header{align-items:flex-start}.today{font-size:12px;max-width:145px;text-align:right}.today svg{display:none}.fields{grid-template-columns:1fr;gap:8px}.field label{margin:5px 0 0}.result-top{align-items:flex-start;gap:14px}.avatar{width:58px;height:58px;flex-basis:58px}.avatar svg{width:31px;height:31px}.age-detail{font-size:17px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}}
 </style>
 </head>
 <body>
