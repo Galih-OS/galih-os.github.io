@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hitung Usia — Kalkulator Usia Online</title>
+<style>
+:root{--navy:#172b45;--blue:#2674e8;--blue2:#155bc3;--ink:#18263b;--muted:#607089;--line:#dce5ef;--mint:#effaf5;--green:#08794e}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(145deg,#edf4fc 0%,#f8fbff 55%,#edf5fc 100%);min-height:100vh}
+header{background:var(--navy);color:#fff;padding:18px clamp(18px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 4px 18px #12233a20}
+.brand{display:flex;align-items:center;gap:12px;font-size:clamp(20px,2.5vw,28px);font-weight:750;letter-spacing:-.5px}
+.brand svg{width:34px;height:34px}
+.today{display:flex;align-items:center;gap:9px;color:#d7e3f3;font-size:14px}
+main{width:min(900px,calc(100% - 32px));margin:38px auto 48px}
+.hero{text-align:center;margin-bottom:28px}
+.hero-icon{width:76px;height:76px;color:var(--blue);margin-bottom:8px}
+h1{font-size:clamp(32px,5vw,48px);letter-spacing:-1.5px;margin:0 0 8px}
+.subtitle{margin:0;color:var(--muted);font-size:clamp(15px,2vw,19px);line-height:1.5}
+.panel{background:#ffffffed;border:1px solid var(--line);border-radius:16px;padding:clamp(20px,4vw,32px);box-shadow:0 12px 35px #1c41650b;margin-bottom:22px}
+.panel h2{font-size:20px;margin:0 0 14px}
+.fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.field label{display:block;font-size:13px;color:var(--muted);margin:8px 0 0}
+input[type=date]{font:inherit;width:100%;padding:14px 13px;border:1px solid #cbd7e5;border-radius:9px;background:#fff;color:var(--ink);min-height:51px;outline:none}
+input[type=date]:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2674e81c}
+button{width:100%;margin-top:22px;border:0;border-radius:9px;background:linear-gradient(100deg,var(--blue),#347eea);color:#fff;padding:15px 18px;font:inherit;font-weight:700;font-size:17px;cursor:pointer;transition:transform .15s,filter .15s}
+button:hover{filter:brightness(.97);transform:translateY(-1px)}button:active{transform:translateY(0)}
+.error{display:none;color:#b42318;background:#fff1f0;border:1px solid #ffd3cf;padding:10px 12px;border-radius:8px;margin-top:14px;font-size:14px}
+.result{background:linear-gradient(120deg,#effaf5,#f5fcf9);border:1px solid #cdebdc;border-radius:16px;padding:clamp(20px,4vw,32px);display:none;box-shadow:0 12px 35px #1c416508}
+.result-top{display:flex;align-items:center;gap:22px}
+.avatar{width:82px;height:82px;flex:0 0 82px;border-radius:50%;background:#d0f3e4;color:var(--green);display:grid;place-items:center}
+.avatar svg{width:42px;height:42px}
+.result-label{font-weight:700;font-size:18px;margin-bottom:8px}
+.age{font-size:clamp(34px,5vw,50px);line-height:1.1;color:var(--green);font-weight:800;letter-spacing:-1px}
+.age-detail{font-size:21px;font-weight:650;margin-top:7px;color:#33445c}
+.rule{height:1px;background:#d4e9df;margin:24px 0 16px}
+.meta{display:grid;gap:10px;color:#52647b;font-size:15px}
+.meta div{display:flex;align-items:center;gap:10px}
+.meta svg{width:19px;height:19px;flex-shrink:0}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.stat{background:#fff;border:1px solid #dceee5;border-radius:10px;padding:13px}
+.stat strong{display:block;font-size:21px;color:var(--green)}
+.stat span{font-size:12px;color:var(--muted)}
+footer{text-align:center;color:#8190a3;font-size:12px;margin-top:25px}
+@media(max-width:620px){header{align-items:flex-start}.today{font-size:12px;max-width:145px;text-align:right}.today svg{display:none}.fields{grid-template-columns:1fr;gap:8px}.field label{margin:5px 0 0}.result-top{align-items:flex-start;gap:14px}.avatar{width:58px;height:58px;flex-basis:58px}.avatar svg{width:31px;height:31px}.age-detail{font-size:17px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+    <span>Hitung Usia</span>
+  </div>
+  <div class="today" id="todayHeader"></div>
+</header>
+<main>
+  <section class="hero">
+    <svg class="hero-icon" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="10" y="14" width="52" height="52" rx="8"/><path d="M23 7v14M49 7v14M10 29h52"/><circle cx="53" cy="55" r="16" fill="#f7fbff"/><path d="M53 46v10l6 4"/></svg>
+    <h1>Hitung Usia</h1>
+    <p class="subtitle">Masukkan tanggal lahir Anda untuk mengetahui usia Anda saat ini.</p>
+  </section>
+  <section class="panel">
+    <h2>Tanggal Lahir</h2>
+    <div class="fields">
+      <div class="field"><input id="birthDate" type="date" aria-label="Tanggal lahir" required><label for="birthDate">Tanggal, bulan, dan tahun lahir</label></div>
+      <div class="field"><input id="asOfDate" type="date" aria-label="Hitung usia per tanggal"><label for="asOfDate">Hitung usia per tanggal (opsional)</label></div>
+      <div class="field" style="display:flex;align-items:end"><button id="todayBtn" type="button" style="margin:0;padding:13px 10px;font-size:14px">Gunakan Hari Ini</button></div>
+    </div>
+    <button id="calculate" type="button">▦ &nbsp; Hitung Usia</button>
+    <div class="error" id="error" role="alert"></div>
+  </section>
+  <section class="result" id="result" aria-live="polite">
+    <div class="result-top">
+      <div class="avatar"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-2.1A6.9 6.9 0 0 1 10.9 12h2.2a6.9 6.9 0 0 1 6.9 6.9V21z"/></svg></div>
+      <div><div class="result-label">Usia Anda</div><div class="age" id="ageYears"></div><div class="age-detail" id="ageDetail"></div></div>
+    </div>
+    <div class="rule"></div>
+    <div class="meta">
+      <div><span>▦</span><span id="birthInfo"></span></div>
+      <div><span>▦</span><span id="asOfInfo"></span></div>
+      <div><span>◷</span><span id="nextBirthday"></span></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong id="totalDays"></strong><span>Total hari hidup</span></div>
+      <div class="stat"><strong id="totalWeeks"></strong><span>Total minggu (perkiraan)</span></div>
+      <div class="stat"><strong id="totalMonths"></strong><span>Total bulan kalender</span></div>
+    </div>
+  </section>
+  <footer>Perhitungan dilakukan langsung di browser Anda · Tidak ada data yang dikirim ke server.</footer>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const DAY = 86400000;
+const fmt = new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'long',year:'numeric'});
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const fromISO = s => { if(!s) return null; const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
+const cleanToday = () => { const n=new Date(); return new Date(n.getFullYear(),n.getMonth(),n.getDate()); };
+const today = cleanToday();
+$('todayHeader').textContent = fmt.format(today);
+$('asOfDate').value = iso(today);
+$('asOfDate').max = iso(today);
+$('birthDate').max = iso(today);
+$('todayBtn').addEventListener('click',()=>{$('asOfDate').value=iso(cleanToday());});
+function calculate(){
+  const birth=fromISO($('birthDate').value);
+  const asOf=fromISO($('asOfDate').value)||cleanToday();
+  const error=$('error'); error.style.display='none';
+  if(!birth){error.textContent='Silakan masukkan tanggal lahir terlebih dahulu.';error.style.display='block';$('result').style.display='none';return;}
+  if(birth>asOf){error.textContent='Tanggal lahir tidak boleh setelah tanggal perhitungan.';error.style.display='block';$('result').style.display='none';return;}
+  let years=asOf.getFullYear()-birth.getFullYear();
+  let months=asOf.getMonth()-birth.getMonth();
+  let days=asOf.getDate()-birth.getDate();
+  if(days<0){
+    months--;
+    const previousMonthDays=new Date(asOf.getFullYear(),asOf.getMonth(),0).getDate();
+    days+=previousMonthDays;
+  }
+  if(months<0){years--;months+=12;}
+  const totalDays=Math.round((asOf-birth)/DAY);
+  const totalMonths=years*12+months;
+  $('ageYears').textContent=`${years} tahun`;
+  $('ageDetail').textContent=`${months} bulan · ${days} hari`;
+  $('birthInfo').textContent=`Tanggal lahir: ${fmt.format(birth)}`;
+  $('asOfInfo').textContent=`Dihitung per: ${fmt.format(asOf)}`;
+  let nextYear=asOf.getFullYear();
+  let next=new Date(nextYear,birth.getMonth(),birth.getDate());
+  // Treat 29 February birthdays as 28 February in non-leap years.
+  if(birth.getMonth()===1&&birth.getDate()===29&&next.getMonth()!==1) next=new Date(nextYear,1,28);
+  if(next<asOf){nextYear++;next=new Date(nextYear,birth.getMonth(),birth.getDate());if(birth.getMonth()===1&&birth.getDate()===29&&next.getMonth()!==1)next=new Date(nextYear,1,28);}
+  const left=Math.round((next-asOf)/DAY);
+  $('nextBirthday').textContent=left===0?'Selamat ulang tahun!':`Ulang tahun berikutnya: ${fmt.format(next)} ( ${left} hari lagi )`;
+  $('totalDays').textContent=totalDays.toLocaleString('id-ID');
+  $('totalWeeks').textContent=Math.floor(totalDays/7).toLocaleString('id-ID');
+  $('totalMonths').textContent=totalMonths.toLocaleString('id-ID');
+  $('result').style.display='block';
+}
+$('calculate').addEventListener('click',calculate);
+$('birthDate').addEventListener('keydown',e=>{if(e.key==='Enter')calculate();});
+</script>
+</body>
+</html>
